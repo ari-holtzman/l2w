@@ -1,0 +1,9 @@
+**/*.swp
+**/*.gz
+data/
+**/__pycache__
+**/*.pt
+**/*.pickle
+.vector_cache/
+scorers/*
+models/
