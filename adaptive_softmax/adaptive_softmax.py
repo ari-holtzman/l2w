@@ -48,14 +48,15 @@ class AdaptiveSoftmax(nn.Module):
         head_out = self.head(inp)
         n = inp.size(0)
         prob = torch.zeros(n, self.cutoffs[-1]).cuda()
-        lsm_head = log_softmax(head_out)
+        lsm_head = log_softmax(head_out, dim=head_out.dim()-1)
         prob.narrow(1, 0, self.output_size).add_(lsm_head.narrow(1, 0, self.output_size).data)
         for i in range(len(self.tail)):
             pos = self.cutoffs[i]
             i_size = self.cutoffs[i+1] - pos
             buff = lsm_head.narrow(1, self.cutoffs[0] + i, 1)
             buff = buff.expand(n, i_size)
-            lsm_tail = log_softmax(self.tail[i](inp))
+            temp = self.tail[i](inp)
+            lsm_tail = log_softmax(temp, dim=temp.dim()-1)
             prob.narrow(1, pos, i_size).copy_(buff.data).add_(lsm_tail.data)
         return prob
 

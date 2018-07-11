@@ -13,7 +13,7 @@ class EntailmentScorer():
         with open(model_path, 'rb') as f:
             self.model = torch.load(f).cuda()
         self.model.eval()
-        self.normalize = torch.nn.LogSoftmax()
+        self.normalize = torch.nn.functional.log_softmax
         self.delimiter = 1
 
     def int_to_tensor(self, tokens):
@@ -67,7 +67,7 @@ class EntailmentScorer():
             score_tensor = self.model(init_ind, (conts_ts, cont_lens))
 
             if normalize_scores:
-                score_tensor = self.normalize(score_tensor)[:,0]
+                score_tensor = self.normalize(score_tensor, dim=score_tensor.dim()-1)[:,0]
             else:
                 score_tensor = score_tensor[:,0]
             score = score_tensor.data.cpu().numpy()
@@ -88,7 +88,7 @@ class EntailmentScorer():
             score_tensor = self.model(conts_ts, (latest_ind, latest_len))
 
             if normalize_scores:
-                score_tensor = self.normalize(score_tensor)[:,0]
+                score_tensor = self.normalize(score_tensor, dim=score_tensor.dim()-1)[:,0]
             else:
                 score_tensor = score_tensor[:,0]
             score = score_tensor.data.cpu().numpy()

@@ -31,7 +31,8 @@ class RNNPredictor():
         else:
             output = output.data
 
-        ps = F.log_softmax(output[-1,:,:]).data
+        temp =  output[-1,:,:]
+        ps = F.log_softmax(temp, dim=temp.dim()-1).data
         if temperature is None:
             _, idxs = ps.topk(k)
         else:
@@ -66,7 +67,8 @@ class RNNPredictor():
         output, hidden = self.model(source, hidden)
         if self.asm:
             output = output.view(source.size(0), source.size(1), self.vocab_size)
-        output = (F.log_softmax(output.transpose(0, 2))).transpose(0, 2)
+        temp = output.transpose(0, 2)
+        output = (F.log_softmax(temp, dim=temp.dim()-1)).transpose(0, 2)
         return output
 
     def top_next(self, cand, term):
@@ -116,7 +118,8 @@ class RNNPredictor():
         else:
             output = output.data
 
-        ps = F.log_softmax(output[-1,:,:]).data
+        temp = output[-1,:,:] 
+        ps = F.log_softmax(temp, dim=temp.dim()-1).data
         for i, cand in enumerate(beam):
             for w in cand.unused:
                 ps[i,w] += r

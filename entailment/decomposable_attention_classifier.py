@@ -104,11 +104,13 @@ class DecomposableAttentionClassifier(nn.Module):
             # e_{ij} len1 x (batch_size x len2)
 
             score1 = torch.transpose(score1.contiguous(), 0, 1).contiguous()
-            prob1 = F.softmax(score1.view(-1, seq_len2)).view(-1, seq_len1, seq_len2) # v0.2
+            temp = score1.view(-1, seq_len2)
+            prob1 = F.softmax(temp, dim=temp.dim()-1).view(-1, seq_len1, seq_len2) # v0.2
 
             score2 = torch.transpose(score1, 1, 2) # batch x len2 x len1
             score2 = score2.contiguous()
-            prob2 = F.softmax(score2.view(-1, seq_len1)).view(-1, seq_len2, seq_len1)
+            temp = score2.view(-1, seq_len1)
+            prob2 = F.softmax(temp, dim=temp.dim()-1).view(-1, seq_len2, seq_len1)
 
             sent1_attended = torch.bmm(prob1, sent2_embed)
             sent2_attended = torch.mm(
@@ -129,11 +131,13 @@ class DecomposableAttentionClassifier(nn.Module):
             score1 = torch.bmm(f1, torch.transpose(f2, 1, 2))
             # e_{ij} batch_size x len1 x len2
 
-            prob1 = F.softmax(score1.view(-1, seq_len2)).view(-1, seq_len1, seq_len2) # v0.2
+            temp = score1.view(-1, seq_len2)
+            prob1 = F.softmax(temp, dim=temp.dim()-1).view(-1, seq_len1, seq_len2) # v0.2
 
             score2 = torch.transpose(score1.contiguous(), 1, 2)
             score2 = score2.contiguous() # e_{ji} batch_size x len2 x len1
-            prob2 = F.softmax(score2.view(-1, seq_len1)).view(-1, seq_len2, seq_len1)
+            temp = score2.view(-1, seq_len1)
+            prob2 = F.softmax(temp, temp.dim()-1).view(-1, seq_len2, seq_len1)
 
             sent1_attended = torch.bmm(prob1, sent2_embed)
             sent2_attended = torch.bmm(prob2, sent1_embed)
