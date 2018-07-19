@@ -95,8 +95,8 @@ python scripts/split_data.py /path/to/nli_output.tsv /path/to/nli_data_dir/ --no
 python scripts/create_classifier_dataset.py /path/to/disc_data/ /path/to/save/rep_data/ --comp lm
 
 # (2) Train model
-python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle \
---decider_type reprnn --fix_embeddings --adam --train_prefixes
+python trainers/train_entailment_classifier.py /path/to/rel_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle \
+--decider_type cnncontext --fix_embeddings --adam --train_prefixes
 ```
 
 #### Entailment
@@ -104,7 +104,7 @@ python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/m
 The entailment data was  already generated in the "Data" section, so now we can just train the model.
 
 ```bash
-python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --adam
+python trainers/train_classifier.py /path/to/entailment_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --adam
 ```
 
 #### Relevance
@@ -114,8 +114,7 @@ python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/m
 python scripts/create_classifier_dataset.py /path/to/disc_data/ /path/to/save/rel_data/ --comp random
 
 # (2) Train model
-python trainers/train_entailment_classifier.py /path/to/rel_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle \
---decider_type cnncontext --fix_embeddings --adam --train_prefixes
+python trainers/train_classifier.py /path/to/rel_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --adam
 ```
 
 #### Lexical Style

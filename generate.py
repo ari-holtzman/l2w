@@ -17,6 +17,7 @@ sys.path.insert(0, os.path.join(path, 'diction/'))
 sys.path.insert(0, os.path.join(path, 'reprnn/'))
 sys.path.insert(0, os.path.join(path, 'style/'))
 sys.path.insert(0, os.path.join(path, 'adaptive_softmax/'))
+sys.path.insert(0, os.path.join(path, 'word_rep/'))
 
 parser = argparse.ArgumentParser()
 parser.add_argument('--data', type=str, default='input.txt',
