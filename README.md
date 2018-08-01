@@ -72,7 +72,7 @@ For the main data, you need to run this script and generate from the language mo
 
 ```bash
 # (1) Run the main processing script. More parameters available. To see, using --help
-python scripts/make_cc_version.py --data /path/to/data/
+python scripts/make_cc_version.py /path/to/data/
 
 # (2) Run the script that generates data from the LM
 bash scripts/gen_lm_data.sh /path/to/data/ /path/to/lm.pt /path/to/vocab.pickle
@@ -85,7 +85,7 @@ For the entailment data, first concatenate all the '.txt' version of all the [SN
 python scripts/create_nli_dataset.py /path/to/concatenated/data.txt /path/to/nli_output.tsv
 
 # (2) Split the data
-python scripts/split_data.py /path/to/nli_output.tsv /path/to/nli_data_dir/ --no_disc_train --valid_frac 0.1 --test_frac 0.1  
+python scripts/split_data.py /path/to/nli_output.tsv /path/to/nli_data/ --no_disc_train --valid_frac 0.1 --test_frac 0.1  
 ```
 
 #### Repetition 
@@ -104,17 +104,18 @@ python trainers/train_entailment_classifier.py /path/to/rel_data/ --save_to /pat
 The entailment data was  already generated in the "Data" section, so now we can just train the model.
 
 ```bash
-python trainers/train_classifier.py /path/to/entailment_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --adam
+python trainers/train_entailment_classifier.py /path/to/nli_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --adam
 ```
 
 #### Relevance
 
 ```bash
-# (1) Make rep data
+# (1) Make rel data
 python scripts/create_classifier_dataset.py /path/to/disc_data/ /path/to/save/rel_data/ --comp random
 
 # (2) Train model
-python trainers/train_classifier.py /path/to/rel_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --adam
+python trainers/train_classifier.py /path/to/rel_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle \
+--decider_type cnncontext --fix_embeddings --adam --train_prefixes
 ```
 
 #### Lexical Style
