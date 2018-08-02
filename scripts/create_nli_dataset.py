@@ -14,7 +14,7 @@ nlp = spacy.load('en')
 
 lines = read_txt(data_path)
 
-label_strs = [line.strip().split('\t')[0] for line in lines]
+label_strs = [line.strip().split('\t')[0] for line in lines[1:]]
 labels = []
 for label in label_strs:
     if label == 'neutral':
