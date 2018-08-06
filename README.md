@@ -71,7 +71,7 @@ First, let's build all the required data files for training all the discriminato
 For the main data, you need to run this script and generate from the language model.
 
 ```bash
-# (1) Run the main processing script. More parameters available. To see, using --help
+# (1) Run the main processing script. Options for different kinds of datasets viewable using --help
 python scripts/make_cc_version.py /path/to/data/
 
 # (2) Run the script that generates data from the LM
