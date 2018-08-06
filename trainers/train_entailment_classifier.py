@@ -193,7 +193,7 @@ for epoch in range(args.num_epochs):
                     batch.candidate, batch.label)
 
         loss.backward()
-        total_loss += loss.data[0]
+        total_loss += loss.data.item()
         optimizer.step()
 
         correct += np.sum(np.equal(np.argmax(decision.data.cpu().numpy(), 1),
