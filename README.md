@@ -95,8 +95,7 @@ python scripts/split_data.py /path/to/nli_output.tsv /path/to/nli_data/ --no_dis
 python scripts/create_classifier_dataset.py /path/to/disc_data/ /path/to/save/rep_data/ --comp lm
 
 # (2) Train model
-python trainers/train_entailment_classifier.py /path/to/rel_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle \
---decider_type cnncontext --fix_embeddings --adam --train_prefixes
+python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --fix_embeddings --adam --ranking_loss --train_prefixes
 ```
 
 #### Entailment
@@ -104,7 +103,7 @@ python trainers/train_entailment_classifier.py /path/to/rel_data/ --save_to /pat
 The entailment data was  already generated in the "Data" section, so now we can just train the model.
 
 ```bash
-python trainers/train_entailment_classifier.py /path/to/nli_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --adam
+python trainers/train_entailment_classifier.py /path/to/nli_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle --adagrad --batch_size 4 --lr 0.01 --num_epochs 100
 ```
 
 #### Relevance
@@ -115,7 +114,7 @@ python scripts/create_classifier_dataset.py /path/to/disc_data/ /path/to/save/re
 
 # (2) Train model
 python trainers/train_classifier.py /path/to/rel_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle \
---decider_type cnncontext --fix_embeddings --adam --train_prefixes
+--decider_type cnncontext --adam  --ranking_loss --train_prefixes
 ```
 
 #### Lexical Style
@@ -125,7 +124,7 @@ The lexical style module uses the exact same data as the repetition module, but 
 ```bash
 # (1) Train model
 python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle \
---decider_type poolending --fix_embeddings --adam --train_prefixes
+--decider_type poolending --adam --ranking_loss --train_prefixes
 ```
 
 ### Train Discriminator Weightings

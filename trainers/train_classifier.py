@@ -46,7 +46,7 @@ parser.add_argument('--stop_threshold',
                     help='Early stopping threshold on validation accuracy')
 parser.add_argument('--lr',
                     type=float,
-                    default=0.01,
+                    default=0.001,
                     help='learning rate for optimizer')
 parser.add_argument('--adam',
                     action='store_true',
