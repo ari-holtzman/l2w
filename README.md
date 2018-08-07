@@ -15,7 +15,7 @@ If you use this in your own work, please [cite us](https://ari-holtzman.github.i
 
 # (2) Install torchtext at specific commit
 cd ../
-git clone git@github.com:pytorch/text.git
+git clone https://github.com/pytorch/text.git
 cd text/
 git reset --hard 36310207f5ca45c87e3192ace320353816ead618
 cd ../l2w/
