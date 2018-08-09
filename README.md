@@ -78,7 +78,7 @@ python scripts/make_cc_version.py /path/to/data/
 bash scripts/gen_lm_data.sh /path/to/data/ /path/to/lm.pt /path/to/vocab.pickle
 ```
 
-For the entailment data, first concatenate all the '.txt' version of all the [SNLI](https://nlp.stanford.edu/projects/snli/) and [MultiNLI](https://www.nyu.edu/projects/bowman/multinli/) data (including train, valid, and test), but watchout to not include the column headers. Then
+For the entailment data, first concatenate all the '.txt' version of all the [SNLI](https://nlp.stanford.edu/projects/snli/) and [MultiNLI](https://www.nyu.edu/projects/bowman/multinli/) data (including train, dev, and test), but watchout to not include the column headers. Then
 
 ```bash
 # (1) Format the data 

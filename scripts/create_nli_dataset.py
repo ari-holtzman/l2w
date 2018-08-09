@@ -14,7 +14,7 @@ nlp = spacy.load('en')
 
 lines = read_txt(data_path)
 
-label_strs = [line.strip().split('\t')[0] for line in lines[1:]]
+label_strs = [line.strip().split('\t')[0] for line in lines]
 labels = []
 for label in label_strs:
     if label == 'neutral':
@@ -24,9 +24,9 @@ for label in label_strs:
     else:
         labels.append(2)
 
-sent1 = [line.strip().split('\t')[5] for line in lines[1:]]
+sent1 = [line.strip().split('\t')[5] for line in lines]
 sent1_tok = [' '.join([tok.text.lower() for tok in nlp.tokenizer(sent)]) for sent in sent1]
-sent2 = [line.strip().split('\t')[6] for line in lines[1:]]
+sent2 = [line.strip().split('\t')[6] for line in lines]
 sent2_tok = [' '.join([tok.text.lower() for tok in nlp.tokenizer(sent)]) for sent in sent2]
 
 with open(out_path, 'w') as out_file:
