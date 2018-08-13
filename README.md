@@ -142,11 +142,13 @@ For an example, see our [pre-trained models](https://drive.google.com/open?id=1e
 Once you have a scorer_weights.tsv simply run:
 
 ```bash
-python generate.py --cuda  --data /path/to/contexts.txt --lm /path/to/lm.pt --dic /path/to/vocab.pickle  --scorers /path/to/scorer_weights.tsv --print --learn
+python scripts/create_classifier_dataset.py /path/to/disc_data/ /path/to/save/weight_data/ --comp none
+
+python generate.py --cuda  --data /path/to/weight_data/valid.tsv --lm /path/to/lm.pt --dic /path/to/vocab.pickle  --scorers /path/to/scorer_weights.tsv --print --learn
 ```
 
 ### Generate
 
 ```bash
-python generate.py --cuda --data /path/to/contexts.txt --lm /path/to/lm.pt --dic /path/to/vocab.pickle  --scorers /path/to/scorer_weights.tsv --print
+python generate.py --cuda --data /path/to/weight_data/test.tsv --lm /path/to/lm.pt --dic /path/to/vocab.pickle  --scorers /path/to/scorer_weights.tsv --print
 ```

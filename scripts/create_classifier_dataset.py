@@ -6,7 +6,7 @@ parser.add_argument('data_dir', type=str,
 parser.add_argument('out_dir', type=str,
                     help='directory to output data to')
 parser.add_argument('--comp', type=str, required=True,
-                    help='what adversarial example to compare to [lm, random]')
+                    help='what adversarial example to compare to [lm, random, none]')
 args = parser.parse_args()
 
 def read_txt(fname):
@@ -21,6 +21,8 @@ for filename in filenames:
         comp_end = read_txt(os.path.join(args.data_dir, filename) + '.generated_continuation')
     elif args.comp == 'random':
         comp_end = read_txt(os.path.join(args.data_dir, filename) + '.shuffled_continuation')
+    elif args.comp == 'none':
+        comp_end = read_txt(os.path.join(args.data_dir, filename) + '.true_continuation')
     else:
         assert(False)
     true_end = read_txt(os.path.join(args.data_dir, filename) + '.true_continuation')
@@ -36,7 +38,10 @@ for filename in filenames:
             else: 
                 tsv_line += true.strip() + '\t' + comp.strip() + '\t' + '0'
         else:
-            tsv_line += comp.strip() + '\t' + true.strip() + '\t' + '1'
+            if args.comp == 'none':
+                tsv_line += true.strip()
+            else:
+                tsv_line += comp.strip() + '\t' + true.strip() + '\t' + '1'
         tsv_lines.append(tsv_line)
     
     with open(os.path.join(args.out_dir, filename[:-4] + '.tsv'), 'w') as out:
