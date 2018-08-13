@@ -103,7 +103,7 @@ python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/m
 The entailment data was  already generated in the "Data" section, so now we can just train the model.
 
 ```bash
-python trainers/train_entailment_classifier.py /path/to/nli_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle --adagrad --batch_size 4 --lr 0.01 --num_epochs 100
+python trainers/train_entailment_classifier.py /path/to/nli_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle --adagrad --batch_size 16 --lr 1 --num_epochs 100
 ```
 
 #### Relevance
