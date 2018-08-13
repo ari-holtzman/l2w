@@ -162,7 +162,7 @@ class BeamRerankDecoder():
             pair_scores = self.model(training_pair).squeeze()
             pair_scores = pair_scores + lm_scores
             pred = pair_scores[0] - pair_scores[1]
-            diff = pred.data[0]
+            diff = pred.item()
             if self.use_ranking_loss:
               loss = self.loss(pred, torch.FloatTensor([1]))
             else:
