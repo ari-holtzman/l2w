@@ -135,7 +135,7 @@ First you have to make a weights file, in the following (tab separated) format:
 1	SCORER_PATH	SCORER_CLASS	/path/to/model.pt
 ```
 
-SCORER_PATH and SCORER_CLASS are word_rep.context_scorer & ContextScorer respectively for all modules, except the entailment module. For the entailment module SCORER_PATH and SCORE_CLASS are entailment.entail_scorer_new & EntailmentScorer.
+SCORER_PATH and SCORER_CLASS are word_rep.context_scorer & ContextScorer respectively for all modules, except the entailment module. For the entailment module SCORER_PATH and SCORER_CLASS are entailment.entail_scorer_new & EntailmentScorer.
 
 For an example, see our [pre-trained models](https://drive.google.com/open?id=1ehvfjP4VPWo9UZotbSeYVWEq3yAoe_76).
 
