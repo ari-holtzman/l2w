@@ -109,8 +109,8 @@ train, valid = data.TabularDataset.splits(
     format='tsv',
     fields=[
         ('context', TEXT),
-        ('gold', TEXT),
         ('generated', TEXT),
+        ('gold', TEXT),
         ])
 
 #TEXT.build_vocab(train)
