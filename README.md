@@ -59,7 +59,7 @@ python utils/make_dic.py /path/to/training_set.txt path/to/save/vocab.pickle --m
 We have to train the base generator first, because two of the discriminators rely on generations from the LM for their training data.
 
 ```bash
-python adaptive_softmax/train.py --cuda --data /path/to/data --dic /path/to/dictionary --cutoffs 4000 40000 --tied --nlayers 2
+python adaptive_softmax/train.py --cuda --data /path/to/data --dic /path/to/dictionary --cutoffs 4000 40000 --nlayers 2
 ```
 
 ### Train Discriminators
