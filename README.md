@@ -95,7 +95,7 @@ python scripts/split_data.py /path/to/nli_output.tsv /path/to/nli_data/ --no_dis
 python scripts/create_classifier_dataset.py /path/to/disc_data/ /path/to/save/rep_data/ --comp lm
 
 # (2) Train model
-python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --fix_embeddings --adam --ranking_loss --train_prefixes
+python trainers/train_classifier.py /path/to/rep_data/ --save_to /path/to/save/model.pt --dic /path/to/vocab.pickle  --fix_embeddings --adam --ranking_loss --train_prefixes --decider_type reprnn
 ```
 
 #### Entailment
